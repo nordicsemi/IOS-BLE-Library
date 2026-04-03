@@ -1,14 +1,19 @@
-![Platforms](https://img.shields.io/badge/platforms-iOS%20|%20macOS-333333.svg)
-
 # iOS-BLE-Library
 
-This library is a wrapper around the CoreBluetooth framework which provides a modern async API based on Combine Framework. 
+![Platforms](https://img.shields.io/badge/Platforms-iOS%20|%20iPadOS%20|%20macOS-333333.svg)
+[![License](https://img.shields.io/github/license/nordicsemi/IOS-BLE-Library)](https://github.com/nordicsemi/IOS-BLE-Library/blob/main/LICENSE)
+[![Release](https://img.shields.io/github/release/nordicsemi/IOS-BLE-Library.svg)](https://github.com/nordicsemi/IOS-BLE-Library/releases)
+[![GitHub stars](https://img.shields.io/github/stars/nordicsemi/IOS-BLE-Library)](https://github.com/nordicsemi/IOS-BLE-Library/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/nordicsemi/IOS-BLE-Library)](https://github.com/nordicsemi/IOS-BLE-Library/members)
+[![GitHub contributors](https://img.shields.io/github/contributors/nordicsemi/IOS-BLE-Library)](https://github.com/nordicsemi/IOS-BLE-Library/graphs/contributors)
+
+This library is a wrapper around the [CoreBluetooth](https://developer.apple.com/documentation/corebluetooth/) framework which provides a modern async API based on [Combine](https://developer.apple.com/documentation/combine) Framework. 
 
 # Library Versions
 
 This package contains two versions of the library:
 * `iOS-BLE-Library` - the library that uses the native CoreBluetooth API.
-* `iOS-BLE-Library-Mock` - the library that uses the [CoreBluetoothMock](https://github.com/NordicSemiconductor/IOS-CoreBluetooth-Mock) API.
+* `iOS-BLE-Library-Mock` - the library that uses the [CoreBluetoothMock](https://github.com/nordicsemi/IOS-CoreBluetooth-Mock) API.
 
 ## Code Generation System
 
@@ -72,7 +77,7 @@ let package = Package(
     /// . . .
     dependencies: [
         // Set the link to the library and choose the version
-        .package(url: "https://github.com/NordicSemiconductor/IOS-BLE-Library.git", from: "0.3.1"),
+        .package(url: "https://github.com/nordicsemi/IOS-BLE-Library.git", from: "0.3.1"),
     ],
     targets: [
         .target(
@@ -97,5 +102,5 @@ let package = Package(
 # Documentation & Examples
 Please check the [Documentation Page](https://nordicsemi.github.io/IOS-BLE-Library/documentation/ios_ble_library/) to start using the library.
 
-Also you can check [iOS-nRF-Toolbox](https://github.com/NordicSemiconductor/IOS-nRF-Toolbox/tree/develop) to find more examples.
+Also you can check [iOS-nRF-Toolbox](https://github.com/nordicsemi/IOS-nRF-Toolbox/tree/develop) to find more examples.
 
