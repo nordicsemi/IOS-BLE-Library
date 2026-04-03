@@ -95,7 +95,7 @@ let package = Package(
 ```
 
 # Documentation & Examples
-Please check the [Documentation Page](https://nordicsemiconductor.github.io/IOS-BLE-Library/documentation/ios_ble_library/) to start using the library.
+Please check the [Documentation Page](https://nordicsemi.github.io/IOS-BLE-Library/documentation/ios_ble_library/) to start using the library.
 
 Also you can check [iOS-nRF-Toolbox](https://github.com/NordicSemiconductor/IOS-nRF-Toolbox/tree/develop) to find more examples.
 
