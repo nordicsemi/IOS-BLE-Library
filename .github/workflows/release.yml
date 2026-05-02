@@ -65,7 +65,7 @@ jobs:
         fi
     - name: Add & Commit
       if: steps.check_changes.outputs.changes_made == 'true'
-      uses: stefanzweifel/git-auto-commit-action@v4
+      uses: stefanzweifel/git-auto-commit-action@v7
       with:
         commit_message: 'Copied files from native CoreBluetooth version to CoreBluetoothMock'
         branch: ${{ steps.check_changes.outputs.working_branch }}
