@@ -9,5 +9,6 @@ DerivedData/
 .netrc
 .idea/
 .vscode/
-
-__pycache__
+CLAUDE.md
+CLAUDE.local.md
+CHANGELOG.local.md

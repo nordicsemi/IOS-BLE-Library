@@ -5,13 +5,11 @@
 //  Created by Nick Kibysh on 19/04/2023.
 //
 
-//CG_REPLACE
-import CoreBluetooth
-//CG_WITH
-/*
+#if MOCK_TRANSPORT
 import CoreBluetoothMock
-*/
-//CG_END
+#else
+import CoreBluetooth
+#endif
 import Foundation
 
 extension CBManagerState {

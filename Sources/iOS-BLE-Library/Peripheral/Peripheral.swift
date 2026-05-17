@@ -9,13 +9,9 @@
 import Combine
 import CoreBluetooth
 
-//CG_REPLACE
-/*EMPTY BLOCK*/
-//CG_WITH
-/*
+#if MOCK_TRANSPORT
 import CoreBluetoothMock
-*/
-//CG_END
+#endif
 import Foundation
 
 private class Observer: NSObject {
@@ -49,34 +45,30 @@ private class NativeObserver: Observer {
 	}
 }
 
-//CG_REPLACE
-/*EMPTY BLOCK*/
-//CG_WITH
-/*
- private class MockObserver: Observer {
-     @objc private var peripheral: CBMPeripheralMock
+#if MOCK_TRANSPORT
+private class MockObserver: Observer {
+    @objc private var peripheral: CBMPeripheralMock
 
-     private weak var publisher: CurrentValueSubject<CBPeripheralState, Never>!
-     private var observation: NSKeyValueObservation?
+    private weak var publisher: CurrentValueSubject<CBPeripheralState, Never>!
+    private var observation: NSKeyValueObservation?
 
-     init(peripheral: CBMPeripheralMock, publisher: CurrentValueSubject<CBPeripheralState, Never>) {
-         self.peripheral = peripheral
-         self.publisher = publisher
-         super.init()
-     }
+    init(peripheral: CBMPeripheralMock, publisher: CurrentValueSubject<CBPeripheralState, Never>) {
+        self.peripheral = peripheral
+        self.publisher = publisher
+        super.init()
+    }
 
-     override func setup() {
-         observation = peripheral.observe(\.state, options: [.new]) { [weak self] _, change in
-             #warning("queue can be not only main")
-             DispatchQueue.main.async {
-                 guard let self else { return }
-                 self.publisher.send(self.peripheral.state)
-             }
-         }
-     }
- }
-*/
-//CG_END
+    override func setup() {
+        observation = peripheral.observe(\.state, options: [.new]) { [weak self] _, change in
+            #warning("queue can be not only main")
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.publisher.send(self.peripheral.state)
+            }
+        }
+    }
+}
+#endif
 
 
 public class Peripheral {
@@ -135,11 +127,7 @@ public class Peripheral {
         assert(peripheral.delegate == nil, "CBPeripheral's delegate should be nil, otherwise it can lead to problems")
 		peripheral.delegate = delegate
 
-//CG_REPLACE
-		observer = NativeObserver(peripheral: peripheral, publisher: stateSubject)
-		observer.setup()
-//CG_WITH
-/*
+#if MOCK_TRANSPORT
         if let p = peripheral as? CBMPeripheralNative {
             observer = NativeObserver(peripheral: p.peripheral, publisher: stateSubject)
             observer.setup()
@@ -147,8 +135,10 @@ public class Peripheral {
             observer = MockObserver(peripheral: p, publisher: stateSubject)
             observer.setup()
         }
-*/
-//CG_END
+#else
+		observer = NativeObserver(peripheral: peripheral, publisher: stateSubject)
+		observer.setup()
+#endif
 	}
 }
 

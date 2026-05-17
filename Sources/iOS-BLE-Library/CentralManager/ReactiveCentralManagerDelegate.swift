@@ -6,13 +6,11 @@
 //
 
 import Combine
-//CG_REPLACE
-import CoreBluetooth
-//CG_WITH
-/*
+#if MOCK_TRANSPORT
 import CoreBluetoothMock
-*/
-//CG_END
+#else
+import CoreBluetooth
+#endif
 import Foundation
 
 // MARK: - ReactiveCentralManagerDelegate
