@@ -77,3 +77,13 @@ let package = Package(
 Please check the [Documentation Page](https://nordicsemi.github.io/IOS-BLE-Library/documentation/ios_ble_library/) to start using the library.
 
 Also you can check [iOS-nRF-Toolbox](https://github.com/nordicsemi/IOS-nRF-Toolbox/tree/develop) to find more examples.
+
+# Special Thanks
+
+Please consider backing this project by using the following **GitHub Sponsor** button.
+
+We want to [thank all of our contributors](https://github.com/nordicsemi/IOS-BLE-Library/graphs/contributors) for all of their additions and improvements to this project. With special mention to one in particular: [Nick!](https://github.com/NickKibish)
+
+<a href="https://github.com/nordicsemi/IOS-BLE-Library/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=nordicsemi/IOS-BLE-Library" />
+</a>
