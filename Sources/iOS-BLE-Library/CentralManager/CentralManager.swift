@@ -6,13 +6,11 @@
 //
 
 import Combine
-//CG_REPLACE
-import CoreBluetooth
-//CG_WITH
-/*
+#if MOCK_TRANSPORT
 import CoreBluetoothMock
-*/
-//CG_END
+#else
+import CoreBluetooth
+#endif
 import Foundation
 
 // MARK: - Error
@@ -88,14 +86,13 @@ public class CentralManager {
 			ReactiveCentralManagerDelegate(), queue: DispatchQueue = .main, options: [String : Any]? = nil
 	) {
 		self.centralManagerDelegate = centralManagerDelegate
-//CG_REPLACE
+#if MOCK_TRANSPORT
+		self.centralManager = CBMCentralManagerFactory.instance(
+			delegate: centralManagerDelegate, queue: queue, options: options)
+#else
 		self.centralManager = CBCentralManager(
 			delegate: centralManagerDelegate, queue: queue, options: options)
-//CG_WITH
-/*
-        self.centralManager = CBMCentralManagerFactory.instance(delegate: centralManagerDelegate, queue: queue)
-*/
-//CG_END
+#endif
 		observer.setup()
 	}
 

@@ -20,6 +20,23 @@ let package = Package(
     ],
     targets: [
         .target(name: "iOS-BLE-Library"),
-        .target(name: "iOS-BLE-Library-Mock", dependencies: ["iOS-BLE-Library", .product(name: "CoreBluetoothMock", package: "IOS-CoreBluetooth-Mock")])
+        .target(
+            name: "iOS-BLE-Library-Mock",
+            dependencies: [
+                .product(name: "CoreBluetoothMock", package: "IOS-CoreBluetooth-Mock"),
+            ],
+            swiftSettings: [.define("MOCK_TRANSPORT")],
+            plugins: ["MockGenerator"]
+        ),
+        .executableTarget(name: "MockGeneratorTool"),
+        .plugin(
+            name: "MockGenerator",
+            capability: .buildTool(),
+            dependencies: ["MockGeneratorTool"]
+        ),
+        .testTarget(
+            name: "iOS-BLE-LibraryTests",
+            dependencies: ["iOS-BLE-Library-Mock"]
+        ),
     ]
 )

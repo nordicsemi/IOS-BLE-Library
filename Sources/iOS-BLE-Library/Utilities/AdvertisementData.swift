@@ -5,13 +5,11 @@
 //  Created by Dinesh Harjani on 23/8/22.
 //
 
-//CG_REPLACE
-import CoreBluetooth
-//CG_WITH
-/*
+#if MOCK_TRANSPORT
 import CoreBluetoothMock
-*/
-//CG_END
+#else
+import CoreBluetooth
+#endif
 import Foundation
 
 public struct AdvertisementData: Hashable {
