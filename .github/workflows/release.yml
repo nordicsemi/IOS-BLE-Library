@@ -14,7 +14,7 @@ jobs:
       tag_message: ${{ steps.get_tag_message.outputs.tag_message }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Get Tag Name
         id: get_tag_name
         run: |
@@ -38,7 +38,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ needs.get_tag_info.outputs.tag_name }}
 
