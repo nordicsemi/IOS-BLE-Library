@@ -14,7 +14,7 @@ This library is a wrapper around the [CoreBluetooth](https://developer.apple.com
 The package ships **two products**, and consumers pick the one that fits their needs:
 
 - `iOS-BLE-Library` — links real [`CoreBluetooth`](https://developer.apple.com/documentation/corebluetooth/). For production apps.
-- `iOS-BLE-Library-Mock` — links [`CoreBluetoothMock`](https://github.com/NordicSemiconductor/IOS-CoreBluetooth-Mock). The public API is identical (a top-level `Alias.swift` re-exports `CB*` names for the underlying `CBM*` types), so code written for `iOS-BLE-Library` recompiles unchanged against `iOS-BLE-Library-Mock` for unit testing.
+- `iOS-BLE-Library-Mock` — links [`CoreBluetoothMock`](https://github.com/nordicsemi/IOS-CoreBluetooth-Mock). The public API is identical (a top-level `Alias.swift` re-exports `CB*` names for the underlying `CBM*` types), so code written for `iOS-BLE-Library` recompiles unchanged against `iOS-BLE-Library-Mock` for unit testing.
 
 # Architecture
 
@@ -50,7 +50,7 @@ Add the package to your `Package.swift` dependencies and pick the product you ne
 let package = Package(
     // ...
     dependencies: [
-        .package(url: "https://github.com/NordicSemiconductor/IOS-BLE-Library.git", from: "1.0.0"),
+        .package(url: "https://github.com/nordicsemi/IOS-BLE-Library.git", from: "1.0.0"),
     ],
     targets: [
         .target(
