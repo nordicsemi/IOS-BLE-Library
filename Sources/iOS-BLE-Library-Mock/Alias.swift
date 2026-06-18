@@ -38,27 +38,31 @@ import CoreBluetoothMock
 // disabled for Xcode 12.5 beta
 //typealias CBPeer                          = CBMPeer
 //typealias CBAttribute                     = CBMAttribute
-public typealias CBCentralManagerFactory         = CBMCentralManagerFactory
-public typealias CBUUID                          = CBMUUID
-public typealias CBError                         = CBMError
-public typealias CBATTError                      = CBMATTError
-public typealias CBManagerState                  = CBMManagerState
-public typealias CBPeripheralState               = CBMPeripheralState
-public typealias CBCentralManager                = CBMCentralManager
-public typealias CBCentralManagerDelegate        = CBMCentralManagerDelegate
-public typealias CBPeripheral                    = CBMPeripheral
-public typealias CBPeripheralDelegate            = CBMPeripheralDelegate
-public typealias CBService                       = CBMService
-public typealias CBCharacteristic                = CBMCharacteristic
-public typealias CBCharacteristicWriteType       = CBMCharacteristicWriteType
-public typealias CBCharacteristicProperties      = CBMCharacteristicProperties
-public typealias CBDescriptor                    = CBMDescriptor
-public typealias CBConnectionEvent               = CBMConnectionEvent
-public typealias CBConnectionEventMatchingOption = CBMConnectionEventMatchingOption
+public typealias CBCentralManagerFactory           = CBMCentralManagerFactory
+public typealias CBUUID                            = CBMUUID
+public typealias CBError                           = CBMError
+public typealias CBATTError                        = CBMATTError
+public typealias CBManagerState                    = CBMManagerState
+public typealias CBPeripheralState                 = CBMPeripheralState
+public typealias CBCentralManager                  = CBMCentralManager
+public typealias CBCentralManagerDelegate          = CBMCentralManagerDelegate
+public typealias CBPeripheral                      = CBMPeripheral
+public typealias CBPeripheralDelegate              = CBMPeripheralDelegate
+public typealias CBService                         = CBMService
+public typealias CBCharacteristic                  = CBMCharacteristic
+public typealias CBCharacteristicWriteType         = CBMCharacteristicWriteType
+public typealias CBCharacteristicProperties        = CBMCharacteristicProperties
+public typealias CBDescriptor                      = CBMDescriptor
+public typealias CBConnectionEvent                 = CBMConnectionEvent
+public typealias CBConnectionEventMatchingOption   = CBMConnectionEventMatchingOption
 @available(iOS 11.0, tvOS 11.0, watchOS 4.0, *)
-public typealias CBL2CAPPSM                      = CBML2CAPPSM
+public typealias CBL2CAPPSM                        = CBML2CAPPSM
 @available(iOS 11.0, tvOS 11.0, watchOS 4.0, *)
-public typealias CBL2CAPChannel                  = CBML2CAPChannel
+public typealias CBL2CAPChannel                    = CBML2CAPChannel
+#if !os(macOS)
+@available(iOS 27.0, *)
+public typealias CBChannelSoundingProcedureResults = CBMChannelSoundingProcedureResults
+#endif
 
 public let CBCentralManagerScanOptionAllowDuplicatesKey       = CBMCentralManagerScanOptionAllowDuplicatesKey
 public let CBCentralManagerOptionShowPowerAlertKey            = CBMCentralManagerOptionShowPowerAlertKey

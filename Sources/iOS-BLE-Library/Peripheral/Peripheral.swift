@@ -14,9 +14,13 @@ import CoreBluetoothMock
 #endif
 import Foundation
 
+// MARK: - Observer
+
 private class Observer: NSObject {
 	func setup() {}
 }
+
+// MARK: - NativeObserver
 
 private class NativeObserver: Observer {
 	@objc private var peripheral: CoreBluetooth.CBPeripheral
@@ -601,4 +605,37 @@ extension Peripheral {
             .eraseToAnyPublisher()
     }
 
+}
+
+// MARK: - Channel Sounding
+
+extension Peripheral {
+    
+    /// A publisher that emits ``ChannelSoundingResults`` of a peripheral.
+    public func listenToChannelSoundingResults() -> AnyPublisher<ChannelSoundingResults?, Error> {
+        peripheralDelegate.channelSoundingResultsSubject
+            .tryMap { output in
+                if let error = output.1 {
+                    throw error
+                }
+                return output.0
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    /// Thin wrapper around iOS-only  ``CBChannelSoundingProcedureResults``.
+    public struct ChannelSoundingResults {
+        public let distance: Double
+        
+        init(_ distance: Double) {
+            self.distance = distance
+        }
+        
+        #if !os(macOS)
+        @available(iOS 27.0, *)
+        init(_ results: CBChannelSoundingProcedureResults) {
+            self.distance = results.distance
+        }
+        #endif
+    }
 }

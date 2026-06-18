@@ -13,8 +13,8 @@ let package = Package(
         .library(name: "iOS-BLE-Library-Mock", targets: ["iOS-BLE-Library-Mock"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/NordicSemiconductor/IOS-CoreBluetooth-Mock.git",
-                 .upToNextMajor(from: "1.0.6")
+        .package(url: "https://github.com/nordicsemi/IOS-CoreBluetooth-Mock.git",
+                 branch: "improvement/channel-sounding"
         ),
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.5.0"),
     ],

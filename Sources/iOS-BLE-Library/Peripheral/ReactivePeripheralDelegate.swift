@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ReactivePeripheralDelegate.swift
 //
 //
 //  Created by Nick Kibysh on 28/04/2023.
@@ -61,6 +61,8 @@ class SingleTaskQueue {
     }
 }
 
+// MARK: - ReactivePeripheralDelegate
+
 open class ReactivePeripheralDelegate: NSObject, CBPeripheralDelegate {
 	let l = L(category: #file)
     
@@ -112,18 +114,21 @@ open class ReactivePeripheralDelegate: NSObject, CBPeripheralDelegate {
 	>()
 
 	// MARK: Managing Notifications for a Characteristic’s Value
+    
 	let notificationStateSubject = PassthroughSubject<
 		(CBCharacteristic, Error?), Never
 	>()
 
 	// MARK: Monitoring Changes to a Peripheral’s Name or Services
+    
 	let updateNameSubject = PassthroughSubject<String?, Never>()
     let modifyServicesSubject = PassthroughSubject<[CBService], Never>()
     
     let readRSSISubject = PassthroughSubject<(NSNumber, Error?), Never>()
     
-    // MARK: - Channels
+    let channelSoundingResultsSubject = PassthroughSubject<(Peripheral.ChannelSoundingResults?, Error?), Never>()
     
+    // MARK: Channels
     
 	// MARK: Discovering Services
 
@@ -231,4 +236,38 @@ open class ReactivePeripheralDelegate: NSObject, CBPeripheralDelegate {
 		fatalError()
 	}
 */
+    
+    #if !os(macOS)
+    
+    // MARK: Channel Sounding
+
+    @available(iOS 27.0, *)
+    public func peripheral(_ peripheral: CBPeripheral, didReceive results: CBChannelSoundingProcedureResults?, error: (any Error)?) {
+        if let error {
+            finishChannelSounding(with: error)
+            return
+        }
+         
+        guard let results else {
+            channelSoundingResultsSubject.send((nil, error))
+            return
+        }
+        
+        let map = Peripheral.ChannelSoundingResults(results)
+        channelSoundingResultsSubject.send((map, error))
+    }
+    
+    @available(iOS 27.0, *)
+    open func peripheral(_ peripheral: CBPeripheral, didCompleteChannelSoundingSession error: Error?) {
+        // Only finish if there was an error, otherwise user cannot restart Channel Sounding.
+        guard let error else { return }
+        finishChannelSounding(with: error)
+    }
+    
+    private func finishChannelSounding(with error: Error) {
+        channelSoundingResultsSubject.send((nil, error))
+        // After sending .finished completion, no more values will be sent.
+        channelSoundingResultsSubject.send(completion: .finished)
+    }
+    #endif
 }
