@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/NordicSemiconductor/IOS-CoreBluetooth-Mock.git",
-                 .upToNextMajor(from: "1.0.0")
+                 .upToNextMajor(from: "1.0.6")
         ),
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
     ],
