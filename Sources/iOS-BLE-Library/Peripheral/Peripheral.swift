@@ -185,12 +185,17 @@ extension Peripheral {
         
         return peripheralDelegate.discoveredServicesSubject
             .first(where: { $0.id == operationID })
-            .tryCompactMap { result throws -> [CBService]? in
+            .tryMap { result throws -> [CBService]? in
                 if let error = result.error {
                     throw error
                 } else {
                     return result.value
                 }
+            }
+            .map {
+                // No Services discovered, which is not an Error, is returned as nil.
+                // So here we transform it into nil array of Services.
+                $0 ?? []
             }
             .map { input -> [CBService] in
                 guard let serviceUUIDs else {
