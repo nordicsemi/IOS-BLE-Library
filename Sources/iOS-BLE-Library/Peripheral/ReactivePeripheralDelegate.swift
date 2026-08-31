@@ -142,7 +142,11 @@ open class ReactivePeripheralDelegate: NSObject, CBPeripheralDelegate {
 		_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService,
 		error: Error?
     ) {
-        let operationId = discoveredCharacteristicsQueue.dequeue()!
+        guard let operationId = discoveredCharacteristicsQueue.dequeue() else {
+            l.d("\(#function) called but Discovered Characteristics Queue is empty.")
+            return
+        }
+        
         let result = BluetoothOperationResult<(CBService, [CBCharacteristic]?)>(value: (service, service.characteristics), error: error, id: operationId)
         
 		discoveredCharacteristicsSubject.send(result)
@@ -152,7 +156,10 @@ open class ReactivePeripheralDelegate: NSObject, CBPeripheralDelegate {
 		_ peripheral: CBPeripheral,
 		didDiscoverDescriptorsFor characteristic: CBCharacteristic, error: Error?
 	) {
-        let operationId = discoveredDescriptorsQueue.dequeue()!
+        guard let operationId = discoveredDescriptorsQueue.dequeue() else {
+            l.d("\(#function) called but Discovered Descriptors Queue is empty.")
+            return
+        }
         let result = BluetoothOperationResult<(CBCharacteristic, [CBDescriptor]?)>(value: (characteristic, characteristic.descriptors), error: error, id: operationId)
         
 		discoveredDescriptorsSubject.send(result)
