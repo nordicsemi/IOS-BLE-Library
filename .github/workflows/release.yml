@@ -44,7 +44,7 @@ jobs:
 
       - name: Print Xcode Version
         run: xcodebuild -version
-      - uses: swift-actions/setup-swift@v1
+      - uses: swift-actions/setup-swift@v3
       - name: Get swift version
         run: swift --version
       - name: Build
