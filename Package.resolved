@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nordicsemi/IOS-CoreBluetooth-Mock.git",
       "state" : {
-        "revision" : "5748c9e8b1750e0d7bc09243c099ff618f211cdf",
-        "version" : "1.0.6"
+        "revision" : "1356e63ea8fc1d80d2e0f6e2f71ec1bd0956adda",
+        "version" : "1.1.0"
       }
     },
     {
