@@ -124,7 +124,9 @@ public class Peripheral {
 	public init(peripheral: CBPeripheral, delegate: ReactivePeripheralDelegate = ReactivePeripheralDelegate()) {
 		self.peripheral = peripheral
 		self.peripheralDelegate = delegate
+        #if DEBUG
         assert(peripheral.delegate == nil, "CBPeripheral's delegate should be nil, otherwise it can lead to problems")
+        #endif
 		peripheral.delegate = delegate
 
 #if MOCK_TRANSPORT
